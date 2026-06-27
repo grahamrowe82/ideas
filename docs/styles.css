@@ -78,7 +78,7 @@ a.card:hover { background: var(--hover); border-color: var(--muted); }
 }
 .lede { font-size: clamp(1.1rem, 2vw, 1.32rem); line-height: 1.5; color: var(--ink-soft); max-width: 50ch; margin: 26px 0 0; }
 .signature { margin: 44px 0 8px; }
-.signature img { display: block; width: 100%; max-width: 760px; height: auto; }
+.signature canvas, .signature img { display: block; width: 100%; max-width: 760px; height: auto; aspect-ratio: 760 / 260; }
 .quote {
   font-family: var(--serif); font-style: italic; font-size: 1.2rem; line-height: 1.5;
   color: var(--ink); max-width: 54ch; margin: 28px 0 0; padding-left: 18px;

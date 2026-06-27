@@ -93,9 +93,12 @@ from elevation. The only layer is the dark subscribe band against the paper. No 
 
 ## Motion
 
-Quiet. The dot-field may settle once on load (the crystallisation), disabled under
-`prefers-reduced-motion`. Hover and focus transitions are ~0.15s. Smooth-scroll on the in-page
-door links, also disabled under reduced-motion. Nothing else animates.
+Quiet. The signature dot-field continuously and slowly oscillates between disorder and a
+crystalline lattice (a phase transition), a ~15s cycle, warm to cool with the order parameter. It
+is paused when scrolled off-screen and when the tab is hidden; under `prefers-reduced-motion` it
+renders one static settled frame; with no JS the static `dotfield.svg` is shown. Hover and focus
+transitions are ~0.15s; smooth-scroll on the in-page door links, disabled under reduced-motion.
+Nothing else animates.
 
 ## Content and voice
 
