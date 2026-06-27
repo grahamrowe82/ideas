@@ -12,7 +12,10 @@
 
   const COLS = 44, ROWS = 16, PAD = 14;
   const SPEED = 0.12;   // px/ms, constant front growth
-  const BAND = 70;      // px, soft front thickness (the transition ring)
+  // For the physicists: this is a 2D Ising-style transition. T_C is the exact critical
+  // temperature at which order spontaneously appears, from Onsager's 1944 solution.
+  const T_C = 2 / Math.log(1 + Math.SQRT2); // = 2.269185314…
+  const BAND = 31 * T_C;                    // ≈70px front thickness, in cheeky units of T_c
   const EMBER = [191, 83, 29], TEAL = [14, 124, 134];
   const lerp = (a, b, t) => a + (b - a) * t;
   const smooth = (t) => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));
