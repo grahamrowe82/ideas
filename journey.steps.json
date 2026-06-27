@@ -1,0 +1,15 @@
+[
+  { "action": "goto", "path": "/" },
+  { "action": "screenshot", "name": "hero" },
+  { "action": "copy", "name": "landing" },
+
+  { "action": "scrollBottom" },
+  { "action": "screenshot", "name": "bottom" },
+  { "action": "copy", "name": "full" },
+
+  { "action": "viewport", "width": 390, "height": 844, "name": "mobile" },
+  { "action": "goto", "path": "/" },
+  { "action": "screenshot", "name": "mobile-top" },
+  { "action": "scrollBottom" },
+  { "action": "screenshot", "name": "mobile-bottom" }
+]
