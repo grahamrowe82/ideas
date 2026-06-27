@@ -154,9 +154,6 @@ a.topic { display: grid; grid-template-columns: 48px 1fr; gap: 18px; padding: 22
 .topic-go { font-family: var(--mono); font-size: 0.82rem; color: var(--phase); }
 a.topic:hover .topic-go { color: var(--phase-deep); }
 
-/* lineages */
-.thinkers { font-size: 1.18rem; line-height: 1.7; max-width: 60ch; color: var(--ink); }
-
 /* arc */
 .phases { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .phases li { border-top: 2px solid var(--phase); padding-top: 14px; }
