@@ -59,17 +59,16 @@ body {
   margin: 0 0 18px;
 }
 .num { font-family: var(--mono); color: var(--phase); }
-.section-lede { font-size: 1.08rem; color: var(--ink-soft); max-width: 56ch; margin: 0 0 28px; }
 
 a { color: var(--phase); text-decoration: none; }
 :focus-visible { outline: 2px solid var(--phase); outline-offset: 3px; }
 
 /* One selection model: every selectable item is a whole-block link that highlights on hover. */
-.doors a, a.card, a.level, a.topic { color: var(--ink); transition: background 0.15s, border-color 0.15s; }
-.doors a:hover, a.level:hover, a.topic:hover { background: var(--hover); }
+a.card, a.topic { color: var(--ink); transition: background 0.15s, border-color 0.15s; }
+a.topic:hover { background: var(--hover); }
 a.card:hover { background: var(--hover); border-color: var(--muted); }
 .go { color: var(--muted); transition: color 0.15s; padding-left: 4px; }
-.doors a:hover .go, a.card:hover .go, a.level:hover .go, a.topic:hover .go { color: var(--phase-deep); }
+a.card:hover .go, a.topic:hover .go { color: var(--phase-deep); }
 
 /* Inline / standalone text links (reading, not selecting). */
 .practice-link, .foot-links a { border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
@@ -96,11 +95,6 @@ a.card:hover { background: var(--hover); border-color: var(--muted); }
 @media (orientation: portrait) and (max-width: 600px) {
   .signature canvas { aspect-ratio: 3 / 4; }
 }
-.quote {
-  font-family: var(--serif); font-style: italic; font-size: 1.2rem; line-height: 1.5;
-  color: var(--ink); max-width: 54ch; margin: 28px 0 0; padding-left: 18px;
-  border-left: 2px solid var(--phase);
-}
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
 .cta {
   font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.02em;
@@ -118,18 +112,6 @@ main section { border-bottom: 1px solid var(--rule); }
 main section.wrap { padding-top: 48px; padding-bottom: 48px; }
 .label { margin-bottom: 24px; }
 
-/* ways in (doors) */
-.doors { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
-.doors li { border-bottom: 1px solid var(--rule); }
-.doors a {
-  display: grid; grid-template-columns: 48px 200px 1fr; gap: 18px; align-items: baseline;
-  padding: 18px 4px; color: var(--ink);
-}
-.doors a:hover { background: var(--hover); }
-.doors a:hover .door-name { color: var(--phase-deep); }
-.door-name { font-family: var(--grotesk); font-weight: 700; font-size: 1.15rem; color: var(--ink); }
-.doors .gloss { color: var(--ink-soft); font-size: 0.98rem; }
-
 /* start here cards */
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 a.card { background: var(--card); border: 1px solid var(--rule); padding: 24px; display: flex; flex-direction: column; }
@@ -137,13 +119,6 @@ a.card { background: var(--card); border: 1px solid var(--rule); padding: 24px; 
 .card-gloss { display: block; font-size: 1.0rem; color: var(--ink-soft); margin: 0 0 18px; flex: 1; }
 .card-piece { display: block; font-family: var(--grotesk); font-weight: 700; font-size: 1.12rem; line-height: 1.25; color: var(--phase); }
 a.card:hover .card-piece { color: var(--phase-deep); }
-
-/* levels */
-.level-list { list-style: none; padding: 0; margin: 0; }
-.level-list li { border-top: 1px solid var(--rule); }
-a.level { display: grid; grid-template-columns: 70px 1fr auto; gap: 18px; padding: 20px 8px; align-items: baseline; }
-.level-list .num { font-weight: 700; }
-.level-body { color: var(--ink-soft); }
 
 /* topics */
 .topic-list { list-style: none; padding: 0; margin: 0; }
@@ -153,13 +128,6 @@ a.topic { display: grid; grid-template-columns: 48px 1fr; gap: 18px; padding: 22
 .topic-body p { margin: 0 0 10px; color: var(--ink-soft); max-width: 58ch; }
 .topic-go { font-family: var(--mono); font-size: 0.82rem; color: var(--phase); }
 a.topic:hover .topic-go { color: var(--phase-deep); }
-
-/* arc */
-.phases { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.phases li { border-top: 2px solid var(--phase); padding-top: 14px; }
-.phases .num { display: block; font-size: 0.8rem; letter-spacing: 0.06em; margin-bottom: 8px; }
-.phases h3 { font-family: var(--grotesk); font-weight: 700; font-size: 1.1rem; margin: 0 0 6px; }
-.phases p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; }
 
 /* practice (secondary) */
 #practice { border-bottom: none; }
@@ -177,8 +145,5 @@ footer.wrap { padding-top: 44px; padding-bottom: 72px; }
 /* ---- responsive ---- */
 @media (max-width: 720px) {
   .cards { grid-template-columns: 1fr; }
-  .phases { grid-template-columns: 1fr; }
-  .doors a { grid-template-columns: 40px 1fr; }
-  .doors .gloss { grid-column: 2; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
