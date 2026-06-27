@@ -16,6 +16,7 @@
   --ink-soft: #3b4346;
   --phase: #0e7c86;
   --phase-deep: #0a5c64;
+  --hover: #e7ebea;
   --muted: #6b7572;
   --rule: #d6dbd9;
   --grotesk: "Space Grotesk", system-ui, sans-serif;
@@ -50,9 +51,18 @@ body {
 .section-lede { font-size: 1.08rem; color: var(--ink-soft); max-width: 56ch; margin: 0 0 28px; }
 
 a { color: var(--phase); text-decoration: none; }
-a.out:not(.cta) { border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
-a.out:not(.cta):hover { border-color: var(--phase); color: var(--phase-deep); }
 :focus-visible { outline: 2px solid var(--phase); outline-offset: 3px; }
+
+/* One selection model: every selectable item is a whole-block link that highlights on hover. */
+.doors a, a.card, a.level, a.topic { color: var(--ink); transition: background 0.15s, border-color 0.15s; }
+.doors a:hover, a.level:hover, a.topic:hover { background: var(--hover); }
+a.card:hover { background: var(--hover); border-color: var(--muted); }
+.go { color: var(--muted); transition: color 0.15s; padding-left: 4px; }
+.doors a:hover .go, a.card:hover .go, a.level:hover .go, a.topic:hover .go { color: var(--phase-deep); }
+
+/* Inline / standalone text links (reading, not selecting). */
+.practice-link, .foot-links a { border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
+.practice-link:hover, .foot-links a:hover { border-color: var(--phase); color: var(--phase-deep); }
 
 /* ---- hero ---- */
 .hero { padding: 86px 0 56px; border-bottom: 1px solid var(--rule); }
@@ -88,7 +98,8 @@ a.out:not(.cta):hover { border-color: var(--phase); color: var(--phase-deep); }
 /* Sections also carry .wrap (padding: 0 28px), which outranks `main section` on
    specificity. Set vertical padding with `main section.wrap` so it actually applies. */
 main section { border-bottom: 1px solid var(--rule); }
-main section.wrap { padding-top: 88px; padding-bottom: 88px; }
+main section.wrap { padding-top: 48px; padding-bottom: 48px; }
+.label { margin-bottom: 24px; }
 
 /* ways in (doors) */
 .doors { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
@@ -97,30 +108,34 @@ main section.wrap { padding-top: 88px; padding-bottom: 88px; }
   display: grid; grid-template-columns: 48px 200px 1fr; gap: 18px; align-items: baseline;
   padding: 18px 4px; color: var(--ink);
 }
-.doors a:hover { background: var(--card); }
+.doors a:hover { background: var(--hover); }
 .doors a:hover .door-name { color: var(--phase-deep); }
 .door-name { font-family: var(--grotesk); font-weight: 700; font-size: 1.15rem; color: var(--ink); }
 .doors .gloss { color: var(--ink-soft); font-size: 0.98rem; }
 
 /* start here cards */
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.card { background: var(--card); border: 1px solid var(--rule); padding: 22px; display: flex; flex-direction: column; }
-.card-who { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
-.card-gloss { font-size: 1.0rem; color: var(--ink-soft); margin: 0 0 18px; flex: 1; }
-.card-piece { font-family: var(--grotesk); font-weight: 700; font-size: 1.12rem; line-height: 1.25; color: var(--phase); border-bottom: 1px solid transparent; }
-.card-piece:hover { color: var(--phase-deep); border-color: var(--phase-deep); }
+a.card { background: var(--card); border: 1px solid var(--rule); padding: 24px; display: flex; flex-direction: column; }
+.card-who { display: block; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+.card-gloss { display: block; font-size: 1.0rem; color: var(--ink-soft); margin: 0 0 18px; flex: 1; }
+.card-piece { display: block; font-family: var(--grotesk); font-weight: 700; font-size: 1.12rem; line-height: 1.25; color: var(--phase); }
+a.card:hover .card-piece { color: var(--phase-deep); }
 
 /* levels */
 .level-list { list-style: none; padding: 0; margin: 0; }
-.level-list li { display: grid; grid-template-columns: 70px 1fr; gap: 18px; padding: 14px 0; border-top: 1px solid var(--rule); align-items: baseline; }
+.level-list li { border-top: 1px solid var(--rule); }
+a.level { display: grid; grid-template-columns: 70px 1fr auto; gap: 18px; padding: 20px 8px; align-items: baseline; }
 .level-list .num { font-weight: 700; }
 .level-body { color: var(--ink-soft); }
 
 /* topics */
 .topic-list { list-style: none; padding: 0; margin: 0; }
-.topic-list li { display: grid; grid-template-columns: 48px 1fr; gap: 18px; padding: 22px 0; border-top: 1px solid var(--rule); }
-.topic-list h3 { font-family: var(--grotesk); font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; margin: 0 0 6px; }
-.topic-list p { margin: 0 0 10px; color: var(--ink-soft); max-width: 58ch; }
+.topic-list li { border-top: 1px solid var(--rule); }
+a.topic { display: grid; grid-template-columns: 48px 1fr; gap: 18px; padding: 22px 8px; }
+.topic-body h3 { font-family: var(--grotesk); font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; margin: 0 0 6px; }
+.topic-body p { margin: 0 0 10px; color: var(--ink-soft); max-width: 58ch; }
+.topic-go { font-family: var(--mono); font-size: 0.82rem; color: var(--phase); }
+a.topic:hover .topic-go { color: var(--phase-deep); }
 
 /* lineages */
 .thinkers { font-size: 1.18rem; line-height: 1.7; max-width: 60ch; color: var(--ink); }

@@ -53,11 +53,26 @@ serif. Self-host all three (no third-party calls).
 
 ## Layout and spacing
 
-- Generous, calm, precise. A faint sense of a grid and a baseline.
 - Max content width ~960px; comfortable reading measure (~62ch) for prose.
 - Coordinate-style mono labels as quiet eyebrows; hairline rules, not boxes, between sections.
-- The "ways in" doors are the core navigation, set like a legend: a mono label, a one-line
-  serif gloss, a teal target.
+
+**Spacing scale (base 8).** Draw every gap from this scale and nothing else: 8, 16, 24, 32, 48,
+64. Coherence comes from using the scale, not from one-off numbers.
+
+**Section rhythm.** Each section has 48px vertical padding, top and bottom, so the gap across a
+divider is ~96px: a clear breath, not a void. Not 0 (cramped, the first mistake), not 88
+(cavernous, the over-correction). Label to content: 24px. Rows within a list: 20px. Card
+padding: 24px.
+
+## Interaction model (one pattern, used everywhere)
+
+Every selectable item, a "ways in" door, a start-here card, a level, a topic, is a **single
+block-level link**. The whole block is the click target; you can click anywhere in it. Hover
+highlights the whole block (a `--card` fill, the title shifting to deep teal). A small arrow in
+the block shows it leads somewhere; blocks that leave for Substack say so quietly. Never make a
+selectable block depend on clicking a small inline link at the end of a line: if the block is a
+choice, the block is the link. Inline links inside running prose are the exception, they stay
+underline-on-hover, because reading is not selecting.
 
 ## Components
 
@@ -70,6 +85,30 @@ serif. Self-host all three (no third-party calls).
 - **The arc:** three phases as a short horizontal timeline.
 - **Subscribe / practice:** subscribe is the primary CTA (teal). The "work with me" practice
   link is present but quiet and secondary.
+
+## Elevation and depth
+
+Flat by intent: no shadows. Depth comes from the paper/card tonal step and hairline rules, not
+from elevation. The only layer is the dark subscribe band against the paper. No z-index stack.
+
+## Motion
+
+Quiet. The dot-field may settle once on load (the crystallisation), disabled under
+`prefers-reduced-motion`. Hover and focus transitions are ~0.15s. Smooth-scroll on the in-page
+door links, also disabled under reduced-motion. Nothing else animates.
+
+## Content and voice
+
+The Phase Transitions voice: serif prose, confident, concrete. Sentence case for headings and
+labels, held consistently. The antislop convention applies to every word on screen (no em dashes,
+no AI-writing tells). Labels are plain words ("Start", not "Lay"). One term per concept.
+
+## Accessibility
+
+Body ink on paper clears WCAG AA comfortably; white-on-teal buttons clear AA; teal text uses the
+deeper `#0a5c64` where it is small so it clears AA too. Every interactive element (doors, cards,
+levels, topics, buttons) has a visible focus ring (2px teal, offset). The whole-block links are
+large tap targets. Reduced-motion is honoured. The dot-field carries descriptive alt text.
 
 ## Do's and don'ts
 

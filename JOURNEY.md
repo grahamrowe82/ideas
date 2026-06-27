@@ -24,6 +24,13 @@ Start at: `/`
    with me" practice surface is present but clearly secondary, never the hero.
 6. Use the **Subscribe** CTA (`#subscribe`). **Verify:** it links to the Substack.
 
+## Interactive and keyboard states
+
+Hover every door, card, level, and topic, plus the two hero buttons. **Verify:** the whole block
+highlights (one consistent model), the arrow shifts to teal, and no control loses its text or
+border on hover. Then tab from the top. **Verify:** every block link and button is reachable in a
+sensible order, the focus ring is always visible, and nothing is trapped.
+
 ## Responsive pass
 
 7. Resize to 390 x 844. **Verify:** no horizontal scroll; the hero and the dot field adapt; the
