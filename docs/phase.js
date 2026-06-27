@@ -10,9 +10,18 @@
   const ctx = canvas.getContext("2d");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const COLS = 72, ROWS = 27, PAD = 14; // 72 × 27 = 1944 sites: the year Onsager solved the 2D Ising model
+  const PAD = 14;
+  // 1944 sites either way (the year Onsager solved the 2D Ising model): a wide 72×27
+  // lattice, re-tiled to a taller 36×54 when the canvas is portrait, so the dots are
+  // not crushed on a phone held upright. Both tilings are 72×27 = 36×54 = 1944.
+  const GRID_WIDE = [72, 27], GRID_TALL = [36, 54];
+  let COLS = 72, ROWS = 27;
 
-  const SPEED = 0.12;   // px/ms, constant front growth
+  // Front growth scales with the canvas, so a transition takes the same wall-clock
+  // time at any size (≈0.12 px/ms at the 760×260 reference). A constant px-speed made
+  // a small portrait canvas, with its short diagonal, cycle about twice as fast.
+  const SPEED_REF = 0.12, DIAG_REF = Math.hypot(760, 260);
+  let speed = SPEED_REF;
   // For the physicists: this is a 2D Ising-style transition. T_C is the exact critical
   // temperature at which order spontaneously appears, from Onsager's 1944 solution.
   const T_C = 2 / Math.log(1 + Math.SQRT2); // = 2.269185314…
@@ -33,6 +42,8 @@
   function build() {
     const r = canvas.getBoundingClientRect();
     W = r.width; H = r.height || 1;
+    [COLS, ROWS] = H > W ? GRID_TALL : GRID_WIDE;          // re-tile the 1944 sites for the shape
+    speed = SPEED_REF * Math.hypot(W, H) / DIAG_REF;       // constant cycle time at any size
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -66,7 +77,7 @@
 
   function frame(now) {
     const dt = Math.min(100, now - (last || now)); last = now;
-    R += SPEED * dt;
+    R += speed * dt;
     if (R > maxD + BAND) { cryst = !cryst; nucleate(); } // front done -> flip, nucleate anew
     paint();
     raf = requestAnimationFrame(frame);
