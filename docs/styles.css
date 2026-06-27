@@ -38,6 +38,17 @@ body {
 
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 28px; }
 
+/* shared header nav */
+.nav { border-bottom: 1px solid var(--rule); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; padding-bottom: 20px; gap: 16px; flex-wrap: wrap; }
+.brand { font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); transition: color 0.15s; }
+.brand:hover { color: var(--phase-deep); }
+.nav-links { display: flex; gap: 22px; }
+.nav-links a { font-family: var(--mono); font-size: 0.82rem; color: var(--ink); border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
+.nav-links a:hover { color: var(--phase-deep); border-color: var(--phase); }
+.nav-links a.active { color: var(--muted); }
+.nav-links a.active:hover { color: var(--muted); border-color: transparent; }
+
 /* labels / eyebrows */
 .label {
   font-family: var(--mono);
