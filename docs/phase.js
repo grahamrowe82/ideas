@@ -10,7 +10,8 @@
   const ctx = canvas.getContext("2d");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const COLS = 44, ROWS = 16, PAD = 14;
+  const COLS = 72, ROWS = 27, PAD = 14; // 72 × 27 = 1944 sites: the year Onsager solved the 2D Ising model
+
   const SPEED = 0.12;   // px/ms, constant front growth
   // For the physicists: this is a 2D Ising-style transition. T_C is the exact critical
   // temperature at which order spontaneously appears, from Onsager's 1944 solution.
@@ -57,7 +58,7 @@
       ctx.globalAlpha = 0.3 + o * 0.55;
       ctx.fillStyle = `rgb(${Math.round(lerp(EMBER[0], TEAL[0], o))},${Math.round(lerp(EMBER[1], TEAL[1], o))},${Math.round(lerp(EMBER[2], TEAL[2], o))})`;
       ctx.beginPath();
-      ctx.arc(x, y, 1.4 + o * 1.0, 0, 6.283);
+      ctx.arc(x, y, 1.1 + o * 0.85, 0, 6.283);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
