@@ -9,9 +9,10 @@ from this. Selectors (to be honoured in the build): `#hero`, `#subscribe` (prima
 
 Start at: `/`
 
-1. Land on the page. **Verify:** the hero shows the tagline ("Maps are finished. Navigation
-   begins."), the one-line description, the order-from-noise signature, and a visible Subscribe
-   action. It reads as a real body of thinking, not a thin landing page.
+1. Land on the page. **Verify:** the hero shows the tagline ("AI can do the work. Choosing
+   what's worth doing is still yours."), the one-line description, the order-from-noise
+   signature, and a visible Subscribe action. It reads as a real body of thinking, not a thin
+   landing page.
 2. Read down to **ways in** (`#ways-in`). **Verify:** the doors are present and legible (by a
    feeling, by your level, by topic, by lineage, along the arc), each a clear entry point.
 3. Look at **start here** (`#start-here`). **Verify:** the curated cards name real reader
