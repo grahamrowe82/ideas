@@ -61,21 +61,43 @@ else
   echo "origin already at $SHORT; verifying what is live"
 fi
 
-echo "Requesting Pages build..."
-gh api -X POST "repos/$SITE_REPO/pages/builds" --silent
-BUILT=""
-for _ in $(seq 1 40); do
-  read -r STATUS BUILT_SHA <<<"$(gh api "repos/$SITE_REPO/pages/builds/latest" \
-    --jq '[.status, .commit] | @tsv')"
-  if [ "$STATUS" = "built" ] && [ "$BUILT_SHA" = "$SHA" ]; then BUILT=yes; break; fi
-  if [ "$STATUS" = "errored" ]; then
-    gh api "repos/$SITE_REPO/pages/builds/latest" --jq '.error.message' >&2
-    break
-  fi
+# Wait for Pages to publish THIS commit. Two failure modes, both observed on
+# 2026-07-23, and the fix for one is the cause of the other:
+#   - a push does not always queue a build (a sibling site sat on a build two
+#     days stale while its new commit was live in the repo), so if nothing has
+#     appeared for this commit after ~30s, ask for one;
+#   - two builds of the same commit race (the push-triggered one and a
+#     requested one) and the loser records a bare "Page build failed." while
+#     the winner publishes normally. So success is ANY built record for this
+#     commit, not the status of the most recent one.
+echo "Waiting for Pages to publish $SHORT..."
+BUILT="" REQUESTED="" RETRIED=""
+for i in $(seq 1 40); do
+  STATUSES="$(gh api "repos/$SITE_REPO/pages/builds" \
+    --jq "[.[] | select(.commit == \"$SHA\") | .status] | join(\" \")")"
+  case " $STATUSES " in
+    *" built "*) BUILT=yes; break ;;
+    *" building "*|*" queued "*) ;;                    # in flight, keep waiting
+    "  ")                                              # nothing for this commit
+      if [ -z "$REQUESTED" ] && [ "$i" -ge 6 ]; then
+        echo "  no build queued for $SHORT; requesting one"
+        gh api -X POST "repos/$SITE_REPO/pages/builds" --silent
+        REQUESTED=yes
+      fi ;;
+    *)                                                 # only failures so far
+      if [ -z "$RETRIED" ]; then
+        echo "  build of $SHORT failed; retrying once"
+        gh api -X POST "repos/$SITE_REPO/pages/builds" --silent
+        RETRIED=yes
+      else
+        echo "Pages failed to build $SHORT twice." >&2
+        exit 1
+      fi ;;
+  esac
   sleep 5
 done
 if [ -z "$BUILT" ]; then
-  echo "Pages did not report a completed build of $SHORT in time; check $SITE_URL" >&2
+  echo "Pages did not publish $SHORT in time; check $SITE_URL" >&2
   exit 1
 fi
 
